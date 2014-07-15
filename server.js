@@ -5,6 +5,7 @@ var _ = require('lodash');
 var express = require('express');
 var serveStatic = require('serve-static');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
 var bowerMapping = [
     { name: '/js/foundation.js',            file: 'bower-foundation/js/foundation.min.js' },
@@ -24,8 +25,14 @@ var apiModules = [
     './api/projects.js'
 ];
 
+if(!fs.existsSync("./data")) {
+    fs.mkdirSync("./data");
+}
+
 var app = express();
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 
 _.each(bowerMapping, function(m) {
