@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="large-7 columns last-row-table">
+        <table class="large-12 columns">
+            <thead>
+            <tr>
+                <th width="100" class="text-right">Time</th>
+                <th width="150">Concept</th>
+                <th>Question</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="q in project.project.questions">
+                <td class="text-right">{{q.timeLine}}</td>
+                <td>{{q.concept}}</td>
+                <td>
+                    <a ng-click="project.goToQuestion(q)"
+                            ng-mouseover="project.showAnswers(q)">
+                        {{q.question}}
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="large-5 columns last-row-table">
+        <table class="large-12 columns">
+            <thead>
+            <tr>
+                <th width="50">&#x2713;</th>
+                <th width="50">Key</th>
+                <th>Answer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="a in project.answers">
+                <td>{{a.isCorrectAnswer}}</td>
+                <td>{{a.key}}</td>
+                <td>{{a.text}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

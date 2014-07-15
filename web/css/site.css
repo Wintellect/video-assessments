@@ -1,0 +1,53 @@
+.vertical-break-after {
+    padding-bottom: 20px;
+}
+
+.vertical-break-before {
+    padding-top: 20px;
+}
+
+.sub-text {
+    font-size: smaller;
+}
+
+.time-line {
+    display: inline-block;
+    position: relative;
+    height: 60px;
+    width: 100%;
+}
+.time-line svg {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border: 1px solid aliceblue;
+}
+
+.last-row {
+    height: 300px;
+}
+
+.last-row-table {
+    height: 260px;
+    overflow-y: scroll;
+}
+
+
+.question-form textarea {
+    height: 150px;
+}
+
+label.drag {
+    opacity: 0.25;
+}
+
+div.drag-over {
+    background: linear-gradient(to bottom right, rgb(200, 200, 200), rgb(242, 242, 242) 40%);
+}
+
+.err-msg {
+    color: red;
+}

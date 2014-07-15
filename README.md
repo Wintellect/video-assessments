@@ -1,4 +1,14 @@
-video-assessments
-=================
+# Video Assessments
 
-Tool for creating assessment questions for online training videos.
+A NodeJS application to create assessments for videos.  This application is run locally to edit 
+the assessement questions for your video.
+
+To get started:
+
+- Install [NodeJS](http://nodejs.org/)
+- Install [Bower (globally)](http://bower.io/)
+- [Git](https://github.com/Wintellect/SqlServerGadgetBox.git) this package.
+- Run "npm install"
+- Run "bower install"
+- Run "npm start"
+- Navigate (using a modern browser) to [http://localhost:19222/](http://localhost:19222/) 

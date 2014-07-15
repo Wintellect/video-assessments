@@ -1,0 +1,118 @@
+<div ng-controller="projectCtrl as project">
+
+    <div class="row vertical-break-before" >
+        <div class="panel large-6 columns">
+            <div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <h5>Project</h5>
+                    </div>
+                </div>
+                <form name="newProjectForm">
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label>
+                                Project Identifier
+                                <input
+                                        type="text"
+                                        name="projectId"
+                                        placeholder="Enter a unique project identifier ..."
+                                        ng-model="project.projectId"
+                                        ng-readonly="true" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row sub-text">
+                        <div class="large-6 columns text-left">
+                            <p>Created:<br />{{project.project.created | date:'medium'}}</p>
+                        </div>
+                        <div class="large-6 columns text-right">
+                            <p>Last Modified:<br />{{project.project.modified | date:'medium'}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label>
+                                Project Title
+                                <input
+                                        type="text"
+                                        name="projectTitle"
+                                        placeholder="Enter the project title ..."
+                                        ng-model="project.project.title" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-3 columns">
+                            <label>
+                                Video Length
+                                <input
+                                        type="text"
+                                        name="videoLength"
+                                        placeholder="hh:mm:ss"
+                                        ng-model="project.project.videoLength" />
+                            </label>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="large-6 columns">
+            <div>
+                <h5>Video</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="large-5 columns">
+            <h5>Time Line</h5>
+        </div>
+        <div class="large-7 columns">
+            <div class="button-bar right">
+                <ul class="button-group">
+                    <li>
+                        <a ng-click="project.saveProject()" class="tiny button secondary">Save</a>
+                    </li>
+                </ul>
+                <ul class="button-group">
+                    <li>
+                        <a ng-click="project.addNewQuestion()" class="tiny button secondary">Add Question</a>
+                    </li>
+                </ul>
+                <ul class="button-group">
+                    <li>
+                        <a class="tiny button secondary"
+                           ui-sref="project.import({id: project.projectId})" >
+                            Import
+                        </a>
+                    </li>
+                    <li>
+                        <a class="tiny button secondary"
+                           ui-sref="project.export({id: project.projectId})" >
+                            Export
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="time-line">
+                <v-time-line
+                        video-length="project.project.videoLength"
+                        questions="project.project.questions">
+                </v-time-line>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel large-12 columns last-row" ui-view>
+        </div>
+    </div>
+
+</div>

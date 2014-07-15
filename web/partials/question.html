@@ -1,0 +1,96 @@
+<div class="row question-form">
+
+    <div class="large-5 columns">
+        <div class="row">
+            <div class="large-12 columns">
+                <label>Question
+                    <textarea ng-model="question.question.text"></textarea>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-9 columns">
+                <label>
+                    Concept
+                    <input
+                            type="text"
+                            ng-model="question.question.concept" />
+                </label>
+            </div>
+            <div class="large-3 columns">
+                <label>
+                    Time Line
+                    <input
+                            type="text"
+                            placeholder="hh:mm:ss"
+                            ng-model="question.question.timeLine" />
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="button-bar right">
+                    <ul class="button-group">
+                        <li>
+                            <a class="tiny button secondary"
+                               ng-hide="question.isNewQuestion"
+                               ng-click="question.deleteQuestion(project.projectId)">
+                                Delete Question
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="button-group">
+                        <li>
+                            <a class="tiny button secondary"
+                               ng-disabled="!question.canAddAnswers"
+                               ng-click="question.addAnswer()">
+                                Add
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="button-group">
+                        <li>
+                            <a class="tiny button secondary"
+                               ui-sref="project.questions({id: project.projectId})">
+                                Cancel
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="question.saveQuestion(project.projectId)" class="tiny button primary">
+                                Save
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="large-7 columns">
+        <div class="row collapse"
+             ng-repeat="a in question.question.answers"
+             v-droppable
+             drag-drop-item="a"
+             can-drop="question.canDropAnswer(item, data)"
+             on-drop="question.onDropAnswer(item, data)">
+            <div class="large-1 column inline">
+                <label v-draggable drag-drop-data="a" class="left inline">
+                    <span>&#x2195;</span>
+                    {{a.key}}
+                    <input type="radio" ng-model="question.question.correctAnswer" ng-value="a.key">
+                </label>
+            </div>
+            <div class="large-10 column">
+                <input type="text" ng-model="a.text">
+            </div>
+            <div class="large-1 column">
+                <ul class="button-group right">
+                    <li>
+                        <a ng-click="question.deleteAnswer(a)">x</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

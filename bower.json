@@ -1,0 +1,17 @@
+{
+  "name": "video-assessments",
+  "version": "1.0.0",
+  "authors": [
+    "Dave Baskin <dbaskin@wintellect.com>"
+  ],
+  "description": "Create assessment questions for videos.",
+  "license": "GPL License v3",
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "bower-foundation": "~4.0.0",
+    "angular": "~1.2.18",
+    "angular-ui-router": "~0.2.10",
+    "uri.js": "~1.13.2",
+    "d3": "~3.4.8"
+  }
+}

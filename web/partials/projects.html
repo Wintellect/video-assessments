@@ -1,0 +1,53 @@
+<div class="row" ng-controller="projectListCtrl as projects">
+    <div class="large-6 columns">
+        <div>
+            <h5>Projects List</h5>
+            <p>Current video projects you are working on:</p>
+            <ul>
+                <li ng-repeat="v in projects.projectList">
+                    <a ui-sref="project.questions({id: v.id})">
+                        {{v.id}} - {{v.title}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="large-6 columns">
+        <div>
+            <h5>New Project</h5>
+            <p>Add a New Project</p>
+            <form name="newProjectForm">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label>
+                            Project Identifier
+                            <input
+                                type="text"
+                                name="projectId"
+                                placeholder="Enter a unique project identifier ..."
+                                ng-model="projects.projectId"
+                                ng-pattern="/^[a-z0-9_-]+$/i"
+                                required />
+                        </label>
+                        <small class="error"
+                               ng-show="newProjectForm.projectId.$error.pattern">
+                            The project id should only contain letters, numbers, '-', or '_'
+                            characters (no spaces).
+                        </small>
+                        <small class="error"
+                               ng-show="projects.createError"
+                               ng-bind="projects.createError"></small>
+                    </div>
+                    <div class="large-12 columns">
+                        <button type="submit"
+                                ng-disabled="newProjectForm.$pristine || newProjectForm.$invalid"
+                                ng-click="projects.createNewProject()">
+                            Create Project
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
