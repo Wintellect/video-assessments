@@ -6,6 +6,10 @@
       "Dave Baskin <dbaskin@wintellect.com>"
   ],
   "license": "GPL-3.0",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/Wintellect/video-assessments.git"
+  },
   "scripts": {
     "start": "node server.js"
   },
