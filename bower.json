@@ -5,7 +5,11 @@
     "Dave Baskin <dbaskin@wintellect.com>"
   ],
   "description": "Create assessment questions for videos.",
-  "license": "GPL License v3",
+  "license": "GPL-3.0",
+  "repository": {
+      "type" : "git",
+      "url" : "https://github.com/Wintellect/video-assessments.git"
+  },
   "dependencies": {
     "lodash": "~2.4.1",
     "bower-foundation": "~4.0.0",

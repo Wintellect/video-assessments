@@ -2,8 +2,10 @@
   "name": "video-assessments",
   "version": "1.0.0",
   "description": "Create assessment questions for videos.",
-  "author": "Dave Baskin <dbaskin@wintellect.com>",
-  "license": "GPL License v3",
+  "contributors": [
+      "Dave Baskin <dbaskin@wintellect.com>"
+  ],
+  "license": "GPL-3.0",
   "scripts": {
     "start": "node server.js"
   },
