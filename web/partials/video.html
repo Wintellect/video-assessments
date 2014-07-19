@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="large-12 columns">
+        <h5>Add Video to Project</h5>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        <input
+                type="file"
+                name="videoFile"
+                v-file-upload
+                upload-to="/api/video/{{project.projectId}}"
+                on-video-loaded="project.onVideoLoaded()">
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns">
+        <a class="button tiny" ui-sref="project.questions({id: project.projectId})">Cancel</a>
+    </div>
+</div>

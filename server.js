@@ -8,21 +8,25 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 
 var bowerMapping = [
-    { name: '/js/foundation.js',            file: 'bower-foundation/js/foundation.min.js' },
-    { name: '/css/normalize.css',           file: 'bower-foundation/css/normalize.css' },
-    { name: '/css/foundation.css',          file: 'bower-foundation/css/foundation.min.css' },
-    { name: '/js/jquery.js',                file: 'jquery/dist/jquery.min.js' },
-    { name: '/js/modernizr.js',             file: 'modernizr/modernizr.js' },
-    { name: '/js/lodash.js',                file: 'lodash/dist/lodash.min.js' },
-    { name: '/js/angular.js',               file: 'angular/angular.js' },
-    { name: '/js/angular-ui-router.js',     file: 'angular-ui-router/release/angular-ui-router.js' },
-    { name: '/css/angular-csp.css',         file: 'angular/angular-csp.css' },
-    { name: '/js/URI.js',                   file: 'uri.js/src/URI.min.js' },
-    { name: '/js/d3.js',                    file: 'd3/d3.min.js' }
+    { name: '/js/foundation.js',                    file: 'bower-foundation/js/foundation.min.js' },
+    { name: '/css/normalize.css',                   file: 'bower-foundation/css/normalize.css' },
+    { name: '/css/foundation.css',                  file: 'bower-foundation/css/foundation.min.css' },
+    { name: '/js/jquery.js',                        file: 'jquery/dist/jquery.min.js' },
+    { name: '/js/modernizr.js',                     file: 'modernizr/modernizr.js' },
+    { name: '/js/lodash.js',                        file: 'lodash/dist/lodash.min.js' },
+    { name: '/js/angular.js',                       file: 'angular/angular.js' },
+    { name: '/js/angular-ui-router.js',             file: 'angular-ui-router/release/angular-ui-router.js' },
+    { name: '/css/angular-csp.css',                 file: 'angular/angular-csp.css' },
+    { name: '/js/URI.js',                           file: 'uri.js/src/URI.min.js' },
+    { name: '/js/d3.js',                            file: 'd3/d3.min.js' },
+    { name: '/js/vendor/jquery.ui.widget.js',       file: 'jquery-file-upload/js/vendor/jquery.ui.widget.js' },
+    { name: '/js/jquery.iframe-transport.js',       file: 'jquery-file-upload/js/jquery.iframe-transport.js' },
+    { name: '/js/jquery.fileupload.js',             file: 'jquery-file-upload/js/jquery.fileupload.js' }
 ];
 
 var apiModules = [
-    './api/projects.js'
+    './api/projects.js',
+    './api/video.js'
 ];
 
 if(!fs.existsSync("./data")) {

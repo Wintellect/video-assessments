@@ -29,6 +29,9 @@ $(document).foundation();
                 .state('project.import', {
                     templateUrl: "partials/import.html"
                 })
+                .state('project.video', {
+                    templateUrl: "partials/video.html"
+                })
                 .state('project.export', {
                     templateUrl: "partials/export.html",
                     controller: "exportCtrl as export"

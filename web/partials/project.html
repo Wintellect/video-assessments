@@ -73,7 +73,10 @@
             <div class="button-bar right">
                 <ul class="button-group">
                     <li>
-                        <a ng-click="project.saveProject()" class="tiny button secondary">Save</a>
+                        <a class="tiny button secondary"
+                           ui-sref="project.video({id: project.projectId})" >
+                            Add Video
+                        </a>
                     </li>
                 </ul>
                 <ul class="button-group">
@@ -93,6 +96,11 @@
                            ui-sref="project.export({id: project.projectId})" >
                             Export
                         </a>
+                    </li>
+                </ul>
+                <ul class="button-group">
+                    <li>
+                        <a ng-click="project.saveProject()" class="tiny button primary">Save</a>
                     </li>
                 </ul>
             </div>
