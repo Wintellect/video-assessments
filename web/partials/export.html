@@ -2,14 +2,26 @@
 
     <div class="large-5 columns">
         <h5>Export File</h5>
-        <a class="button tiny" ng-click="export.downloadFile()">Download</a>
-        <a class="button tiny secondary" ui-sref="project.questions({id: project.projectId})">Cancel</a>
+        <p>
+            <span ng-class="{ success: !export.errorCount, alert: export.errorCount }" class="label">
+                {{export.errorCount}} error(s) found.
+            </span>
+        </p>
+        <p>
+            <a class="button tiny" ng-click="export.downloadFile()">Download</a>
+            <a class="button tiny secondary" ui-sref="project.questions({id: project.projectId})">Cancel</a>
+        </p>
     </div>
 
     <div class="large-7 columns last-row-table">
         <ul>
             <li ng-repeat="m in export.messages" ng-class="{'err-msg': m.isErr}">
                 {{m.text}}
+                <ul ng-if="m.subList">
+                    <li ng-repeat="s in m.subList">
+                        {{s}}
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

@@ -117,12 +117,126 @@
     ProjectsService.prototype.validateCurrentProject = function() {
         var service = this;
         var messages = [];
-        var prj = service.currentProject;
-        var v, timeBetween;
-        if(prj && prj.questions) {
+        angular.extend(messages, {
+            addMsg: function(msg, subList) {
+                this.push({ text: msg, subList: subList });
+            },
+            addErr: function(msg) {
+                this.push({ isErr: true, text: msg });
+                return true;
+            }
+        });
+        _.some(service.validations, function(v) {
+            return v(messages, service.currentProject, service);
+        });
+        return messages;
+    };
 
-            v = 0;
-            timeBetween = _.chain(prj.questions)
+    ProjectsService.prototype.validations = [
+
+        // Project information is present
+        function(messages, prj) {
+            if (!prj) {
+                return messages.addErr("Project information not found.");
+            }
+        },
+
+        // Project questions are present
+        function(messages, prj) {
+            if(!prj.questions || !prj.questions.length) {
+                return messages.addErr("No questions are available in the project.");
+            }
+        },
+
+        // Project title
+        function(messages, prj) {
+            if(!prj.title) {
+                messages.addErr("Project title not specified.");
+            }
+        },
+
+        // Concepts
+        function(messages, prj) {
+            if(_.some(prj.questions, function(q) {
+                return !q.concept;
+            })) {
+                messages.addErr("Concept must be specified on all questions.");
+            }
+        },
+
+        // Question text
+        function(messages, prj) {
+            if(_.some(prj.questions, function(q) {
+                return !q.question;
+            })) {
+                messages.addErr("Question text must be specified.");
+            }
+        },
+
+        // At least two answers
+        function(messages, prj) {
+            if(_.some(prj.questions, function(q) {
+                return !q.answers || q.answers.length < 2;
+            })) {
+                messages.addErr("Each question needs at least two choices.");
+            }
+        },
+
+        // Answer text
+        function(messages, prj) {
+            if(_.some(prj.questions, function(q) {
+                return _.some(q.answers, function(a) {
+                    return !a;
+                })
+            })) {
+                messages.addErr("Answer text must be specified.");
+            }
+        },
+
+        // Correct answer
+        function(messages, prj) {
+            var keyList = ['A', 'B', 'C', 'D', 'E'];
+            if(_.some(prj.questions, function(q) {
+                var idx = _.indexOf(keyList, q.correctAnswer, true);
+                return idx === -1 || idx >= q.answers.length;
+            })) {
+                messages.addErr("Questions must be assigned the correct answer.");
+            }
+        },
+
+        // Time line values
+        function(messages, prj, service) {
+            if(_.some(prj.questions, function(q) {
+                var v = q.timeLine || "";
+                var secs = service.timeLineUtils.timeLineToSeconds(v);
+                var maxSeconds = 60 * 60 * 3; // Maximum 3 hours
+                return !v.match(/^(\d{1,2}:)?\d{1,2}:\d{2}$/) || secs === 0 || secs > maxSeconds;
+            })) {
+                messages.addErr("Invalid time line values found.");
+            }
+        },
+
+        // Total number of questions
+        function(messages, prj) {
+            messages.addMsg("Total questions: " + prj.questions.length);
+        },
+
+        // Total length
+        function(messages, prj) {
+            var min = _.min(prj.questions, function(q) { return q.seconds; });
+            var max = _.max(prj.questions, function(q) { return q.seconds; });
+            messages.addMsg([
+                "Questions span from",
+                min.timeLine,
+                "to",
+                max.timeLine
+            ].join(" "));
+        },
+
+        // Average time between questions
+        function(messages, prj, service) {
+            var v = 0;
+            var timeBetween = _.chain(prj.questions)
                 .map(function(q) {
                     return q.seconds;
                 })
@@ -145,21 +259,29 @@
                 service.timeLineUtils.secondsToTimeLine(
                     Math.floor(timeBetween.sum / timeBetween.count)
                 );
+            messages.addMsg("Average time between questions: " + timeBetween.avg);
+        },
 
-            messages.push({
-                text: "Total questions: " + prj.questions.length
-            });
-            messages.push({
-                text: "Average time between questions: " + timeBetween.avg
-            });
+        // Distinct concepts and counts
+        function(messages, prj) {
+            var groups = _.chain(prj.questions)
+                .groupBy(function(q) {
+                    return (q.concept ? q.concept : "").toLowerCase();
+                })
+                .map(function(v, k) {
+                    return {
+                        key: k,
+                        concept: v[0].concept,
+                        count: v.length
+                    };
+                })
+                .sortBy('key')
+                .map(function(v) {
+                    return v.count + " - " + v.concept;
+                })
+                .value();
+            messages.addMsg(groups.length + " concept(s) found.", groups);
         }
-        else {
-            messages.push({
-                isErr: true,
-                text: "Project information not found."
-            })
-        }
-        return messages;
-    };
+    ];
 
 }());
