@@ -7,10 +7,11 @@
         '$state',
         'timeLineUtils',
         'projectsService',
+        'videoControls',
         QuestionController
     ]);
 
-    function QuestionController($state, timeLineUtils, projectsService) {
+    function QuestionController($state, timeLineUtils, projectsService, videoControls) {
         var ctrl = this;
         var q = projectsService.currentQuestion;
         ctrl.$state = $state;
@@ -32,6 +33,9 @@
         };
         ctrl.canAddAnswers = ctrl.question.answers.length < maxAnswerCount;
         ctrl.isNewQuestion = projectsService.isNewQuestion(q);
+        if(ctrl.isNewQuestion) {
+            ctrl.question.timeLine = videoControls.getCurrentTime();
+        }
     }
 
     QuestionController.prototype.saveQuestion = function(projectId) {
