@@ -86,8 +86,9 @@
 
     ProjectController.prototype.onVideoLoaded = function() {
         var ctrl = this;
-        alert("Video was loaded.");
-        ctrl.$state.go('project.questions');
+        ctrl.$state.go('project.questions', {}, {
+            reload: true
+        });
     };
 
 }());

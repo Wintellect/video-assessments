@@ -1,13 +1,8 @@
 
 module.exports.initializer = function(app) {
 
-    var _ = require('lodash');
     var fs = require('fs');
-    var busboy = require('connect-busboy');
-
     var projectIdRegex = /^[0-9a-z_-]+$/i;
-
-    app.use(busboy());
 
     app.get("/api/video/:id", function(req, res) {
         var projectId = req.param("id");

@@ -13,6 +13,7 @@
     "angular-ui-router": "~0.2.10",
     "uri.js": "~1.13.2",
     "d3": "~3.4.8",
-    "jquery-file-upload": "~9.6.0"
+    "jquery-file-upload": "~9.6.0",
+    "videojs": "~4.6.4"
   }
 }

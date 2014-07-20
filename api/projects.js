@@ -14,7 +14,10 @@ module.exports.initializer = function(app) {
                     fs.readdir('data', callback);
                 },
                 function(files, callback) {
-                    async.map(files, function(file, callback) {
+                    var jsonFiles = _.filter(files, function(fn) {
+                        return fn.match(/\.json$/i);
+                    });
+                    async.map(jsonFiles, function(file, callback) {
                             var fileName = "data/" + file;
                             async.waterfall([
                                     function(callback) {

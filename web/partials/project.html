@@ -59,9 +59,15 @@
             </div>
         </div>
         <div class="large-6 columns">
-            <div>
-                <h5>Video</h5>
-            </div>
+            <video
+                    class="video-js vjs-default-skin"
+                    controls
+                    preload="none"
+                    width="458"
+                    height="286"
+                    v-video
+                    project-id="{{project.projectId}}">
+            </video>
         </div>
     </div>
 
