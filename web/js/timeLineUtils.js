@@ -15,9 +15,7 @@
             values.unshift(twoDigit(n % 60));
             values.unshift(twoDigit(Math.floor(n / 60) % 60));
             v = Math.floor(n / (60 * 60));
-            if(v !== 0) {
-                values.unshift(twoDigit(v));
-            }
+            values.unshift(v);
             return values.join(':');
         }
         return "00:00:00";
