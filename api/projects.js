@@ -93,7 +93,8 @@ module.exports.initializer = function(app) {
                 project = JSON.parse(fs.readFileSync(fileName));
 
                 csv = stringify({
-                    headers: 3
+                    headers: 3,
+                    rowDelimiter: 'windows'
                 });
                 csv.on('readable', function() {
                     while(row = csv.read()){
