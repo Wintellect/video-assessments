@@ -3,13 +3,29 @@
         <div>
             <h5>Projects List</h5>
             <p>Current video projects you are working on:</p>
-            <ul>
-                <li ng-repeat="v in projects.projectList">
-                    <a ui-sref="project.questions({id: v.id})">
-                        {{v.id}} - {{v.title}}
-                    </a>
-                </li>
-            </ul>
+
+            <div class="row project-list" ng-repeat="v in projects.projectList">
+                <div class="large-3 columns">
+                    <ul class="button-group">
+                        <li>
+                            <a class="tiny button secondary"
+                               ui-sref="project.questions({id: v.id})" >
+                                Edit
+                            </a>
+                        </li>
+                        <li>
+                            <a class="tiny button secondary"
+                               ui-sref="view({id: v.id})" >
+                                View
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="large-9 columns">
+                    {{v.id}} - {{v.title}}
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="large-6 columns">
@@ -40,6 +56,7 @@
                     </div>
                     <div class="large-12 columns">
                         <button type="submit"
+                                class="small button primary"
                                 ng-disabled="newProjectForm.$pristine || newProjectForm.$invalid"
                                 ng-click="projects.createNewProject()">
                             Create Project

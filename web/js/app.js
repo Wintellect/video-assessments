@@ -39,6 +39,11 @@ $(document).foundation();
                 .state('project.question', {
                     templateUrl: "partials/question.html",
                     controller: "questionCtrl as question"
+                })
+                .state('view', {
+                    templateUrl: "partials/videoView.html",
+                    url: "/view/:id",
+                    controller: "videoViewCtrl as videoView"
                 });
     }]);
 
