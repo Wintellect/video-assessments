@@ -44,6 +44,11 @@ $(document).foundation();
                     templateUrl: "partials/videoView.html",
                     url: "/view/:id",
                     controller: "videoViewCtrl as videoView"
+                })
+                .state('exam', {
+                    templateUrl: "partials/examView.html",
+                    url: "/exam/:id",
+                    controller: "examViewCtrl as examView"
                 });
     }]);
 

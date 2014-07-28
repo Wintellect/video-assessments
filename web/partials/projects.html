@@ -6,20 +6,11 @@
 
             <div class="row project-list" ng-repeat="v in projects.projectList">
                 <div class="large-4 columns">
-                    <ul class="button-group">
-                        <li>
-                            <a class="button tiny secondary"
-                               ui-sref="project.questions({id: v.id})" >
-                                Edit
-                            </a>
-                        </li>
-                        <li>
-                            <a class="button tiny secondary"
-                               ui-sref="view({id: v.id})" >
-                                View
-                            </a>
-                        </li>
-                    </ul>
+                    <a ui-sref="project.questions({id: v.id})" >Edit</a>
+                    <span> &bull; </span>
+                    <a ui-sref="view({id: v.id})">View</a>
+                    <span> &bull; </span>
+                    <a ui-sref="exam({id: v.id})">Exam</a>
                 </div>
                 <div class="large-8 columns">
                     {{v.id}} - {{v.title}}

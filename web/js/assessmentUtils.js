@@ -4,14 +4,12 @@
 
     videoApp.service('assessmentUtils', [
         'timeLineUtils',
-        'videoControls',
         AssessmentUtils
     ]);
 
-    function AssessmentUtils(timeLineUtils, videoControls) {
+    function AssessmentUtils(timeLineUtils) {
         var self = this;
         self.timeLineUtils = timeLineUtils;
-        self.videoControls = videoControls;
         self.project = {};
         self.assessmentPoints = [];
     }
@@ -46,19 +44,27 @@
                 totalQuestions: self.assessmentPoints.length,
                 numberSkipped: 0,
                 numberCorrect: 0,
-                numberAnswered: 0
+                numberAnswered: 0,
+                percentComplete: "0%"
             };
         },
 
-        getCurrentAssessmentQuestion: function() {
+        getCurrentAssessmentQuestion: function(seconds) {
             var self = this;
-            var seconds = self.videoControls.getCurrentSeconds();
             var q;
             if(seconds > 0) {
                 q = _.find(self.assessmentPoints, function(p) {
                     return seconds >= p.seconds && !p.questionAsked;
                 });
             }
+            return q;
+        },
+
+        getNextAssessmentQuestion: function() {
+            var self = this;
+            var q = _.find(self.assessmentPoints, function(p) {
+                return !p.questionAsked;
+            });
             return q;
         },
 
@@ -76,6 +82,13 @@
                     self.tally.numberCorrect += 1;
                 }
             }
+            if(self.tally.totalQuestions > 0) {
+                self.tally.percentComplete =
+                    Math.floor(self.tally.numberAnswered / self.tally.totalQuestions * 100.0) + '%';
+            }
+            else {
+                self.tally.percentComplete = "0%";
+            }
             return isCorrect;
         },
 
@@ -83,7 +96,8 @@
             totalQuestions: 0,
             numberSkipped: 0,
             numberCorrect: 0,
-            numberAnswered: 0
+            numberAnswered: 0,
+            percentComplete: "0%"
         }
 
     });

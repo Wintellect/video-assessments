@@ -1,0 +1,75 @@
+<div class="row">
+
+    <h2>{{examView.project.title}}</h2>
+
+    <div class="row" ng-if="!examView.isExamFinished">
+        <div class="large-10 large-offset-1 columns">
+            <div class="row">
+                <p class="lead">{{examView.question.question}}</p>
+            </div>
+            <div class="row"
+                 ng-repeat="a in examView.question.answers">
+                <div class="large-11 column">
+                    <label class="left inline">
+                        {{a.key}}
+                        <input type="radio" ng-model="examView.selectedAnswer" ng-value="a.key">
+                        {{a.text}}
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-6 columns">
+                    <div class="alert-box success" ng-if="examView.isCorrectAnswer">
+                        Correct!
+                    </div>
+                    <div class="alert-box alert" ng-if="examView.isIncorrectAnswer">
+                        Incorrect, the correct answer is
+                        <strong>{{examView.question.correctAnswer}}</strong>
+                    </div>
+                </div>
+                <div class="large-6 columns text-right">
+                    <button
+                            class="button"
+                            ng-click="examView.checkAnswer()"
+                            ng-disabled="!examView.selectedAnswer">
+                        {{examView.buttonText}}
+                    </button>
+                    <button
+                            class="button secondary"
+                            ng-click="examView.skipQuestion()"
+                            ng-disabled="examView.question.questionAsked">
+                        Skip This Question
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="examView.isExamFinished">
+        <div class="large-10 large-offset-1 columns">
+            <div class="row">
+                <p class="lead">Congratulations!</p>
+                <p>You've completed the exam.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="progress large-12">
+                <span class="meter" ng-style="{ width: examView.tally.percentComplete }"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="large-12 columns">
+            {{examView.tally.numberAnswered}} of {{examView.tally.totalQuestions}} questions answered
+            &bull;
+            {{examView.tally.numberCorrect}} answers correct
+            &bull;
+            {{examView.tally.numberSkipped}} questions skipped
+        </div>
+    </div>
+
+</div>

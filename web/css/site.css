@@ -54,6 +54,7 @@ div.drag-over {
 
 div.project-list {
     padding-top: 10px;
+    padding-bottom: 10px;
     border-top: 1px solid #EEE;
 }
 

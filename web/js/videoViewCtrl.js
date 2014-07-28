@@ -84,9 +84,10 @@
         checkForNextAssessmentQuestion: function() {
             var self = this;
             var df = self.$q.defer();
+            var seconds = self.videoControls.getCurrentSeconds();
             self.selectedAnswer = null;
             self.isCorrectAnswer = self.isIncorrectAnswer = false;
-            self.question = self.assessmentUtils.getCurrentAssessmentQuestion();
+            self.question = self.assessmentUtils.getCurrentAssessmentQuestion(seconds);
             if(self.question) {
                 df.resolve();
             }
