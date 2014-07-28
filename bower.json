@@ -8,12 +8,12 @@
   "license": "GPL-3.0",
   "dependencies": {
     "lodash": "~2.4.1",
-    "bower-foundation": "~4.0.0",
     "angular": "~1.2.18",
     "angular-ui-router": "~0.2.10",
     "uri.js": "~1.13.2",
     "d3": "~3.4.8",
     "jquery-file-upload": "~9.6.0",
-    "videojs": "~4.6.4"
+    "videojs": "~4.6.4",
+    "foundation": "~5.3.1"
   }
 }

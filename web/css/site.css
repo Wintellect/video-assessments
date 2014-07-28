@@ -60,3 +60,7 @@ div.project-list {
 div.project-list:hover {
     background: linear-gradient( 90deg, #EEE, #FFF );
 }
+
+.reveal-modal {
+    min-height: 690px;
+}

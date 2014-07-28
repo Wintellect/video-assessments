@@ -19,20 +19,41 @@
         this.timeLineUtils = timeLineUtils;
     }
 
-    VideoControlsService.prototype.getCurrentTime = function() {
-        var currentSeconds = 0;
-        if(videoPlayer) {
-            currentSeconds = Math.floor(videoPlayer.currentTime());
+    angular.extend(VideoControlsService.prototype, {
+
+        getCurrentSeconds: function() {
+            var currentSeconds = 0;
+            if(videoPlayer) {
+                currentSeconds = Math.floor(videoPlayer.currentTime());
+            }
+            return currentSeconds;
+        },
+
+        getCurrentTime: function() {
+            return this.timeLineUtils.secondsToTimeLine(this.getCurrentSeconds());
+        },
+
+        pauseVideo: function() {
+            if(videoPlayer) {
+                videoPlayer.pause();
+            }
+        },
+
+        playVideo: function() {
+            if(videoPlayer) {
+                videoPlayer.play();
+            }
         }
-        return this.timeLineUtils.secondsToTimeLine(currentSeconds);
-    };
+
+    });
 
     function VideoDirective() {
 
         return {
             restrict: 'A',
             scope: {
-                projectId: '@'
+                projectId: '@',
+                onCurrentPositionChanged: '&'
             },
             link: directiveLink
         };
@@ -41,6 +62,10 @@
             videojs(element[0], {}, function() {
 
                 videoPlayer = this;
+
+                videoPlayer.on('timeupdate', function() {
+                    scope.onCurrentPositionChanged();
+                });
 
                 scope.$watch('projectId', function(projectId) {
                     if(projectId) {

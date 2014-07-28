@@ -15,8 +15,61 @@
                     width="100%"
                     height="666"
                     v-video
-                    project-id="{{videoView.projectId}}">
+                    project-id="{{videoView.projectId}}"
+                    on-current-position-changed="videoView.onVideoPositionChanged()">
             </video>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="large-12 columns">
+            {{videoView.tally.numberAnswered}} of {{videoView.tally.totalQuestions}} questions answered
+            &bull;
+            {{videoView.tally.numberCorrect}} answers correct
+            &bull;
+            {{videoView.tally.numberSkipped}} questions skipped
+        </div>
+    </div>
+
+    <div class="reveal-modal" data-reveal v-reveal-modal modal-controls="videoView.modalControls">
+        <h2>Assessment</h2>
+        <div class="row">
+            <p class="lead">{{videoView.question.question}}</p>
+        </div>
+        <div class="row collapse"
+             ng-repeat="a in videoView.question.answers">
+            <div class="large-11 column">
+                <label class="left inline">
+                    {{a.key}}
+                    <input type="radio" ng-model="videoView.selectedAnswer" ng-value="a.key">
+                    {{a.text}}
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-6 columns">
+                <div class="alert-box success" ng-if="videoView.isCorrectAnswer">
+                    Correct!
+                </div>
+                <div class="alert-box alert" ng-if="videoView.isIncorrectAnswer">
+                    Incorrect, the correct answer is
+                    <strong>{{videoView.question.correctAnswer}}</strong>
+                </div>
+            </div>
+            <div class="large-6 columns text-right">
+                <button
+                        class="button"
+                        ng-click="videoView.checkAnswer()"
+                        ng-disabled="!videoView.selectedAnswer">
+                    {{videoView.buttonText}}
+                </button>
+                <button
+                        class="button secondary"
+                        ng-click="videoView.skipQuestion()"
+                        ng-disabled="videoView.question.questionAsked">
+                    Skip This Question
+                </button>
+            </div>
         </div>
     </div>
 

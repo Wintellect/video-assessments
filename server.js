@@ -9,9 +9,10 @@ var fs = require('fs');
 var busboy = require('connect-busboy');
 
 var bowerMapping = [
-    { name: '/js/foundation.js',                    file: 'bower-foundation/js/foundation.min.js' },
-    { name: '/css/normalize.css',                   file: 'bower-foundation/css/normalize.css' },
-    { name: '/css/foundation.css',                  file: 'bower-foundation/css/foundation.min.css' },
+    { name: '/js/foundation.js',                    file: 'foundation/js/foundation/foundation.js' },
+    { name: '/js/foundation.reveal.js',             file: 'foundation/js/foundation/foundation.reveal.js' },
+    { name: '/css/normalize.css',                   file: 'foundation/css/normalize.css' },
+    { name: '/css/foundation.css',                  file: 'foundation/css/foundation.css' },
     { name: '/js/jquery.js',                        file: 'jquery/dist/jquery.min.js' },
     { name: '/js/modernizr.js',                     file: 'modernizr/modernizr.js' },
     { name: '/js/lodash.js',                        file: 'lodash/dist/lodash.min.js' },
