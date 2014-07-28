@@ -87,3 +87,32 @@ npm start
 - Open a modern browser (like Google Chrome, this won't work in IE9 or earlier) and navigate to 
 the path [http://localhost:19222/](http://localhost:19222/).
 
+## Updating the Video Assessments Tool
+
+If you wish to update the tool to the latest version, do the following:
+
+- Make "video-assessments" the default directory using the command:
+
+```
+cd video-assessments
+```
+
+- Pull (download) the latest version of the Video Assessments repository using the command:
+
+```
+git pull
+```
+
+- Update the local node modules using the command:
+
+```
+npm install
+```
+
+- Update the required Javascript components using the command:
+
+```
+bower install
+```
+
+You can now run the application as described above.
